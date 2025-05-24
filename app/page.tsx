@@ -1,7 +1,8 @@
 "use client";
 
-import TaskModal from "@/components/TaskModal";
-import { Card, Stack, Title, Text } from "@mantine/core";
+import openTaskModal from "@/components/openTodoModal";
+import { Card, Center, Stack, Title } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
 
 export default function Home() {
   return (
@@ -13,18 +14,16 @@ export default function Home() {
         bg="rgba(137, 132, 132, 0.68)"
         radius="md"
         withBorder
+        w="20%"
+        h={250}
         shadow="sm"
-        w="14rem"
-        h="14rem"
         onClick={() => {
-          TaskModal();
+          openTaskModal();
         }}
       >
-        <Stack align="center" h="100vh" justify="center">
-          <Title order={1} fz="5rem" fw="normal">
-            +
-          </Title>
-        </Stack>
+        <Center h="100%" className="pointer">
+          <IconPlus size={60} />
+        </Center>
       </Card>
     </Stack>
   );
