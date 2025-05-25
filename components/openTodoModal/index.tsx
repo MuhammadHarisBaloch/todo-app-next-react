@@ -1,9 +1,13 @@
 import { modals } from "@mantine/modals";
 import NewTodoModal from "./modal";
+import { Todo } from "@/app/page";
 
-export default function openTodoModal() {
+interface openTodoModalProps {
+  onUpdateTodo: (todo: Todo) => void;
+}
+export default function openTodoModal({ onUpdateTodo }: openTodoModalProps) {
   modals.open({
     title: "Add Todo",
-    children: <NewTodoModal />,
+    children: <NewTodoModal onUpdateTodo={onUpdateTodo} />,
   });
 }

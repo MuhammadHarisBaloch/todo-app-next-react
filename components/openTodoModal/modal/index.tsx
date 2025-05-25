@@ -1,3 +1,4 @@
+import { Todo } from "@/app/page";
 import {
   Button,
   ColorPicker,
@@ -6,9 +7,14 @@ import {
   Text,
   Textarea,
 } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import { useState } from "react";
 
-function NewTodoModal() {
+interface NewTodoModalProps {
+  onUpdateTodo: (todo: Todo) => void;
+}
+
+function NewTodoModal({ onUpdateTodo }: NewTodoModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("");
@@ -19,6 +25,7 @@ function NewTodoModal() {
         <Input
           placeholder="Todo title"
           value={title}
+          required
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
       </Input.Wrapper>
@@ -26,6 +33,7 @@ function NewTodoModal() {
         label="Todo Description"
         placeholder="Todo description"
         value={description}
+        required
         onChange={(event) => setDescription(event.currentTarget.value)}
       />
       <Stack gap="xs">
@@ -55,9 +63,17 @@ function NewTodoModal() {
       </Stack>
       <Button
         onClick={() => {
-          console.log("title:", title);
-          console.log("description:", description);
-          console.log("color:", color);
+          if (title == "" || description == "" || color == "") return;
+          onUpdateTodo({
+            title: title,
+            description: description,
+            color: color,
+          });
+          modals.closeAll();
+
+          // console.log("title:", title);
+          // console.log("description:", description);
+          // console.log("color:", color);
         }}
       >
         Submit
